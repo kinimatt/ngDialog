@@ -524,7 +524,7 @@
                             var hasOverlayClass = options.overlay ? '' : ' ngdialog-no-overlay';
                             $dialog = $el('<div id="'+dialogID + '" class="ngdialog' + hasOverlayClass + '"></div>');
                             $dialog.html((options.overlay ?
-                                '<div class="ngdialog-overlay"></div><div class="ngdialog-content" role="document">' + template + '</div>' :
+                                '<div class="ngdialog-overlay"><div class="ngdialog-overlay-inner"></div></div><div class="ngdialog-content" role="document">' + template + '</div>' :
                                 '<div class="ngdialog-content" role="document">' + template + '</div>'));
 
                             $dialog.data('$ngDialogOptions', options);
@@ -678,7 +678,7 @@
                             }
 
                             closeByDocumentHandler = function (event) {
-                                var isOverlay = options.closeByDocument ? $el(event.target).hasClass('ngdialog-overlay') : false;
+                                var isOverlay = options.closeByDocument ? $el(event.target).hasClass('ngdialog-overlay-inner') : false;
                                 var isCloseBtn = $el(event.target).hasClass('ngdialog-close');
 
                                 if (isOverlay || isCloseBtn) {
@@ -690,7 +690,8 @@
                                 var hammerTime = scope.hammerTime = $window.Hammer($dialog[0]);
                                 hammerTime.on('tap', closeByDocumentHandler);
                             } else {
-                                $dialog.bind('click', closeByDocumentHandler);
+                                var elementResult = angular.element($dialog[0].getElementsByClassName('ngdialog-overlay-inner'));
+                                elementResult.bind('click', closeByDocumentHandler); //$dialog.bind('click', closeByDocumentHandler);
                             }
 
                             dialogsCount += 1;
@@ -887,3 +888,4 @@
 
     return m;
 }));
+

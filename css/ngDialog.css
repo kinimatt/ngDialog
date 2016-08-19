@@ -61,7 +61,8 @@
 
 .ngdialog.ngdialog-disabled-animation,
 .ngdialog.ngdialog-disabled-animation .ngdialog-overlay,
-.ngdialog.ngdialog-disabled-animation .ngdialog-content {
+.ngdialog.ngdialog-disabled-animation .ngdialog-content,
+.ngdialog.ngdialog-disabled-animation .ngdialog-overlay .ngdialog-overlay-inner {
   -webkit-animation: none!important;
   animation: none!important;
 }
@@ -76,6 +77,17 @@
   -webkit-backface-visibility: hidden;
   -webkit-animation: ngdialog-fadein 0.5s;
   animation: ngdialog-fadein 0.5s;
+}
+
+.ngdialog-overlay-inner {
+  position: fixed;
+  background: rgba(0, 0, 0, 0);
+  top: 0;
+  right: 20px;
+  bottom: 0;
+  left: 0;
+  -webkit-backface-visibility: hidden;
+  pointer-events: all;
 }
 
 .ngdialog-no-overlay {
